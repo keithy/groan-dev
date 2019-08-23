@@ -1,0 +1,6 @@
+[submodule "groan"]
+	path = groan
+	url = https://github.com/keithy/groan
+[submodule "tester/bash-spec-2"]
+	path = tester/bash-spec-2
+	url = https://github.com/keithy/bash-spec-2.git
