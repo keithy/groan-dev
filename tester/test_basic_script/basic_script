@@ -36,9 +36,9 @@ function readLocations
     local dir="$1"
     local name="$2"
 
-    configDir="$1" #global used within conf file
-    $DEBUG && echo "Reading Locations: ${dir}/${name}.locations.conf"
-    source "${dir}/${name}.locations.conf"
+    configDir="$1" #global used within <name>.locations.sh file
+    $DEBUG && echo "Reading Locations: ${dir}/${name}.locations.sh"
+    source "${dir}/${name}.locations.sh"
 
     return 0
 }
@@ -47,12 +47,12 @@ function readConfig
 {
     for configFile in ${configFileLocations[@]}
     do
-            $DEBUG && echo "Looked for config in: $configFile"
-            if [[ -f $configFile ]]; then
-                    $VERBOSE && echo "Reading configuration: $configFile"
-                    source "$configFile"
-                    break
-            fi
+        $DEBUG && echo "Looked for config in: $configFile"
+        if [[ -f $configFile ]]; then
+                $VERBOSE && echo "Reading configuration: $configFile"
+                source "$configFile"
+                break
+        fi
     done
 }
 
@@ -220,7 +220,7 @@ fi
 
 for loc in ${locations[@]} 
 do
-	source $loc/$defaultDispatch
+    source $loc/$defaultDispatch
 done
 
 $LOUD && echo "Not Found: $commandName sub-command '$subcommand'."
