@@ -5,12 +5,11 @@
 ## `groan`-dev
 
 The `groan` framework is a basis for building complex hierarchical CLI interfaces with bash and other languages, 
-and aspires to achieve this with some degree of efficiency and elegance, 
-through hierarchical composition.
+and aspires to achieve this with some degree of elegance, through hierarchical composition.
 
 The `groan-dev` project provides comprehensive testing tooling and specs for `groan`.
 This facilitates debugging of features such as command **composition** which
-may be particularly tricky to implement.
+may be tricky to implement correctly.
 
 ## Use hardlinks
 

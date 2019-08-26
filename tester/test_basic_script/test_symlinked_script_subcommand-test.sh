@@ -10,7 +10,7 @@ describe "Test groan base script (symlinked)" && {
       should_succeed
 
       echo "[$out]"
-      expect $out to_be "Test successful" 
+      expect $out to_be "Test successful: ()" 
     )
   }
 
@@ -28,5 +28,16 @@ describe "Test groan base script (symlinked)" && {
        expect_array out to_contain "Looking for test\*.sub.\* in:*"     
     }
   }
+
+  context "subcommand test that args get through" && {
+    it "Displays 'Test successful message'" && (
+      out=$(./symlinked_script test this --or that --please)
+      should_succeed
+
+      echo "[$out]"
+      expect $out to_be "Test successful: (this --or that --please)" 
+    )
+  }
+
 }
 
