@@ -1,20 +1,15 @@
-# grow.conf.sh
+#!/usr/bin/env bash
+# groan.test-ruby.cmd.rb
 #
-# by Keith Hodges 2010
+# by Keith Hodges 2017
 #
-# A Dummy
+# A Test
 
-command="test"
-description="dummy (test for duplication)"
+# meta-data (sourced by bash)
+command="test-ruby"
+description="testing ruby invocation"
 usage="usage:
-$breadcrumbs test"
-
-$SHOWHELP && executeHelp
-$METADATAONLY && return
-
-$DEBUG && echo "Command: '$command'"
-
-echo "Test successful: ($@)"
+$commandName test-ruby"
 
 #"This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 
 #Any additional contribution submitted for incorporation into or for distribution with this file shall be presumed subject to the same license."

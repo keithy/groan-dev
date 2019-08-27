@@ -5,7 +5,7 @@ source ../bash-spec-2/bash-spec.sh
 describe "Test groan base_script test-ruby" && {
 
   context "base_script test-ruby" && {
-    it "Displays 'Test successful message Hello its ruby!'" && {
+    it "Displays 'Test successful message'" && {
       out=$(./basic_script test-ruby)
       should_succeed
 
