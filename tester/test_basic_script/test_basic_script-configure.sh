@@ -6,9 +6,9 @@ source ../bash-spec-2/bash-spec.sh
 rm ./basic_script.conf.sh
 rm ./basic_script.conf.sh.save
 
-describe "Test groan base script - no configuration set" && {
+describe "Test groan base_script configure- no configuration set" && {
 
-  context "subcommand configure --show" && {
+  context "base_script configure --show" && {
     it "Displays 'no file found'" && {
       out=$(./basic_script configure --show)
       should_fail
@@ -18,7 +18,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
   
- context "subcommand configure - default action is --show" && {
+ context "base_script configure - default action is --show" && {
     it "Displays 'no file found'" && {
       out=$(./basic_script configure)
       should_fail
@@ -28,7 +28,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure --edit" && {
+  context "base_script configure --edit" && {
     it "Displays 'no file found'" && {
       out=$(./basic_script configure --edit)
       should_fail
@@ -38,7 +38,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure --options" && {
+  context "base_script configure --options" && {
     it "Displays list" && {
       capture out <( ./basic_script configure --options 2>&1 )
       should_succeed
@@ -50,7 +50,7 @@ describe "Test groan base script - no configuration set" && {
 
     }
   }
-  context "subcommand configure --options from other context" && {
+  context "base_script configure --options from other context" && {
     it "Displays list" && {
       capture out <( cd other; ../basic_script configure --options 2>&1 )
       should_succeed
@@ -66,7 +66,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure blah - non existent file" && {
+  context "base_script configure blah - non existent file" && {
    
     it "Auto-appends .conf and reports not-found" && {
       out=$(./basic_script configure blah)
@@ -77,7 +77,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure test" && {
+  context "base_script configure test" && {
    
     it "Auto-appends .conf and displays file contents" && {
        capture out <( ./basic_script configure test 2>&1 )
@@ -86,7 +86,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure test --install" && {
+  context "base_script configure test --install" && {
    
     it "requests destination location" && {
       out=$(./basic_script configure test --install)
@@ -97,7 +97,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
  
-  context "subcommand configure test --install --local" && {
+  context "base_script configure test --install --local" && {
    
     it "requests confirmation" && {
       capture out <( ./basic_script configure test --install --local)
@@ -110,7 +110,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure test --install --local --confirm" && {
+  context "base_script configure test --install --local --confirm" && {
    
     it "requests confirmation" && {
       capture out <( ./basic_script configure test --install --local --confirm)
@@ -123,7 +123,7 @@ describe "Test groan base script - no configuration set" && {
     }
   }
 
-  context "subcommand configure --show" && {
+  context "base_script configure --show" && {
     it "Displays --local config found'" && {
       capture out <( ./basic_script configure --show 2>&1)
       should_succeed

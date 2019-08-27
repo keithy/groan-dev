@@ -2,9 +2,9 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base script" && {
+describe "Test groan base_script environment" && {
 
-  context "subcommand environment" && {
+  context "base_script environment" && {
    
     it "Displays environment" && {
        capture out <( ./basic_script environment 2>&1 )

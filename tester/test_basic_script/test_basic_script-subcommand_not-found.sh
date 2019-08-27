@@ -2,7 +2,7 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base script" && {
+describe "Test groan base_script" && {
 
   context "invalid sub-command " && {
     it "Displays not found message" && (
@@ -23,7 +23,7 @@ describe "Test groan base script" && {
        expect_array out to_contain "Looked for config in: /*/basic_script.conf.sh"
        expect_array out to_contain "Looked for config in: /*/.basic_script.conf.sh"
        expect_array out to_contain "Looked for config in: /*/test_basic_script/basic_script.conf.sh"
-       expect_array out to_contain 'commandName: basic_script'
+       expect_array out to_contain '*SCRIPT*basic_script*'
        expect_array out to_contain "Sub-command: 'not-ever'"
        expect_array out to_contain "Looking for not-ever\*.sub.\* in:*"     
     }

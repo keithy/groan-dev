@@ -2,17 +2,17 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base script" && {
+describe "Test groan base_script" && {
 
   context "ambiguous sub-command" && {
-    it "Displays ambiguous message" && (
+    it "Displays ambiguous message" && {
       out=$(./basic_script tes)
       should_fail
 
       echo "[$out]"
       
       expect $out to_be "Multiple options exist for requested 'tes' (test-ruby test)" 
-    )
+    }
   }
 
   context "ambiguous sub-command --debug output" && {

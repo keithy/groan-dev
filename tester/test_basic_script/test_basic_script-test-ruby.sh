@@ -2,9 +2,9 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base script" && {
+describe "Test groan base_script test-ruby" && {
 
-  context "subcommand test-ruby" && {
+  context "base_script test-ruby" && {
     it "Displays 'Test successful message'" && {
       out=$(./basic_script test-ruby)
       should_succeed
@@ -14,7 +14,7 @@ describe "Test groan base script" && {
     }
   }
 
-  context "subcommand test --debug output" && {
+  context "base_script test --debug output" && {
     it "Displays debug output" && {
        capture out <( ./basic_script -D test-ruby 2>&1 )
         
@@ -23,7 +23,7 @@ describe "Test groan base script" && {
        expect_array out to_contain "Looked for config in: /*/basic_script.conf.sh"
        expect_array out to_contain "Looked for config in: /*/.basic_script.conf.sh"
        expect_array out to_contain "Looked for config in: /*/test_basic_script/basic_script.conf.sh"
-       expect_array out to_contain 'commandName: basic_script'
+       expect_array out to_contain '*SCRIPT*basic_script*'
        expect_array out to_contain "Sub-command: 'test-ruby'"
        expect_array out to_contain "Looking for test-ruby\*.sub.\* in:*"     
     }
