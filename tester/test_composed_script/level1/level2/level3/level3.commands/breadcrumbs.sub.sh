@@ -1,20 +1,26 @@
-# groan test.sh
+# grow.help.cmd.sh
 #
 # by Keith Hodges 2010
 #
-# A Dummy
-
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
-command="test"
-description="dummy (test for duplication)"
+# General Help On Commands
+
+# may have been invoked with a partial name
+# so set the full command name
+command="breadcrumbs"
+description="show breadcrumbs"
+ 
 usage="usage:
-$breadcrumbs test"
+$breadcrumbs           #show breadcrumbs
+$breadcrumbs  --help   #this text"
 
 $SHOWHELP && executeHelp
 $METADATAONLY && return
 
-echo "Test successful: ($@)"
+$DEBUG && echo "Command: '$command'"
+
+echo "$breadcrumbs"
 
 #"This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 
 #Any additional contribution submitted for incorporation into or for distribution with this file shall be presumed subject to the same license."

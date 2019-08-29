@@ -6,7 +6,7 @@ describe "Test groan base_script" && {
 
   context "base_script test" && {
     it "Displays 'Test successful message'" && (
-      out=$(./basic_script test)
+      out=$(./base_script test)
       should_succeed
 
       echo "[$out]"
@@ -16,14 +16,14 @@ describe "Test groan base_script" && {
 
   context "base_script test --debug output" && {
     it "Displays debug output" && {
-      capture out <( ./basic_script -D test 2>&1 )
+      capture out <( ./base_script -D test 2>&1 )
         
       printf '[%s]\n' "${out[@]}"
  
-      expect_array out to_contain "Looked for config in: /*/basic_script.conf.sh"
-      expect_array out to_contain "Looked for config in: /*/.basic_script.conf.sh"
-      expect_array out to_contain "Looked for config in: /*/test_basic_script/basic_script.conf.sh"
-      expect_array out to_contain '*SCRIPT*basic_script*'
+      expect_array out to_contain "Looked for config in: /*/base_script.conf.sh"
+      expect_array out to_contain "Looked for config in: /*/.base_script.conf.sh"
+      expect_array out to_contain "Looked for config in: /*/test_composed_script/base_script.conf.sh"
+      expect_array out to_contain '*SCRIPT*base_script*'
       expect_array out to_contain "Sub-command: 'test'"
       expect_array out to_contain "Looking for test\*.sub.\* in:*"     
     }
@@ -31,7 +31,7 @@ describe "Test groan base_script" && {
 
   context "base_script test that args get through" && {
     it "Displays 'Test successful message'" && (
-      out=$(./basic_script test this --or that --please)
+      out=$(./base_script test this --or that --please)
       should_succeed
 
       echo "[$out]"

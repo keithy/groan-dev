@@ -4,3 +4,4 @@ script:
     - make -C tester/test_dummy
     - make -C tester/test_run 
     - make -C tester/test_basic_script 
+    - make -C tester/test_composed_script 

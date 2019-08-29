@@ -34,10 +34,12 @@ function identifyPlatform
 
 function readLocations
 {
-  
-    #commandDir commandName globals used within <name>.locations.sh file
-    $DEBUG && echo "Reading Locations: ${commandDir}/${commandName}.locations.sh"
-    source "${commandDir}/${commandName}.locations.sh"
+    local dir="$1"
+    local name="$2"
+
+    commandDir="$1" #global used within <name>.locations.sh file
+    $DEBUG && echo "Reading Locations: ${dir}/${name}.locations.sh"
+    source "${dir}/${name}.locations.sh"
 
     return 0
 }
@@ -162,7 +164,6 @@ if [ -L "$commandFile" ]; then
   commandFile=`readlink -n $commandFile`
 fi
 commandName=${commandFile##*/} # `basename $commandFile` 
-rootCommandName="$commandName"
 
 # our contribution to help
 
@@ -238,10 +239,9 @@ do
 done
  
 breadcrumbs="$commandName"
-rootCommandDir=$(dirname "$commandFile")
-commandDir="$rootCommandDir"
+commandDir=$(dirname "$commandFile")
 
-readLocations
+readLocations "$commandDir" "$commandName"
 readConfig
 readThemes
 

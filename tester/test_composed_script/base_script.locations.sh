@@ -10,7 +10,7 @@ configFileLocations=(
 
 #locations to search for commands
 locations=(
-	"$configDir/basic_script.commands" # basic_script commands for testing 
+	"$commandDir/$commandName.commands" # basic_script commands for testing 
 )
 
 defaultDispatch="_dispatch.sh"

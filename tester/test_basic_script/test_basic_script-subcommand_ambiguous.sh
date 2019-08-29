@@ -11,7 +11,7 @@ describe "Test groan base_script" && {
 
       echo "[$out]"
       
-      expect $out to_be "Multiple options exist for requested 'tes' (test-ruby test)" 
+      expect $out to_be "Multiple options exist for requested 'tes' (test-exec test-ruby test)" 
     }
   }
 

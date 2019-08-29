@@ -1,18 +1,19 @@
-# grow.conf.sh
+# groan test.exec
 #
 # by Keith Hodges 2010
 #
 # A Dummy
 
+$DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
+
 command="test"
 description="dummy (test for duplication)"
 usage="usage:
-$breadcrumbs test"
+$breadcrumbs         - display text and (args)
+$breadcrumbs --help  - this text"
 
 $SHOWHELP && executeHelp
-$METADATAONLY && return
-
-$DEBUG && echo "Command: '$command'"
+$METADATAONLY && exit 0
 
 echo "Test successful: ($@)"
 
