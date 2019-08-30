@@ -2,26 +2,25 @@
 #
 # by Keith Hodges 2018
 #
-# Subcommands like 'help.sub.helper.cmd.sh' - a script name like this is a mapping
-#  interpreted as the "<help> sub-command in the parent (groan) command's list,
-#  is implemented by the <helper> command contained in the parent (groan) folder
+# Sub-commands like 'help.sub.helper.cmd.sh' are invoked based upon their prefix <cmd>.sub
+# 
+# This script is then able to interpret for itself the rest of its own name.
+# In this case the sub-command in the parent command's list,
+# is implemented by the <helper>.cmd command contained in the parent folder
 #  
-#  Mapped sub-commands all have identical implementation, taking parameters from their own name
-#
-#  theScriptName is obtained from the script file name
-#  it looks for commands in a folder with the same name 
-#  ../$name/commands
+# So mapped sub-commands may have identical implementation, taking parameters from their own name
 
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
-commandName="${scriptName%.cmd.sh}"
-commandName="${commandName#*.sub.}"
+commandName="${scriptName%.cmd.*}"  # keep everything up to .cmd.
+commandName="${commandName#*.sub.}" # keep everything after .sub.
 commandDir="${scriptDir%/*}/$commandName"
+dispatchName="${scriptName#*.cmd.}"  # keep everything after .cmd.
 
 $DEBUG && echo "scriptName: ${bold}$scriptName${reset}"
 $DEBUG && echo "commandDir: $commandDir"
 
-readLocations 
+readLocations
 
 shiftArgsIntoNext
 subcommand="$next"
@@ -34,22 +33,13 @@ $DEBUG && echo "$scriptSubcommand($commandName) sub-command: '$subcommand' args(
 for scriptDir in "${locations[@]}"
 do
 
-    if [ -f "$scriptDir/$defaultDispatch" ]; then
-        source "$scriptDir/$defaultDispatch"
+    if [ -f "$scriptDir/$dispatchName" ]; then
+        source "$scriptDir/$dispatchName"
     fi
 done
 
 # So no commands match the argument...
-
-
-### dispatch
-#for scriptDir in "${locations[@]}"
-#do
-#	if [ -f "$scriptDir/_${scriptSubcommand}_dispatch.sh" ]; then
-#            source "$scriptDir/_${scriptSubcommand}_dispatch.sh"
-#	fi
-#done
-
+ 
 $LOUD && echo "Not Found: ${bold}${breadcrumbs}${reset} sub-command '${bold}${subcommand}${reset}'."
  
 exit 1

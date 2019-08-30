@@ -25,7 +25,7 @@ list=()
 for scriptPath in $scriptDir/$target
 do
     scriptName="${scriptPath##*/}"
-    scriptSubcommand="${scriptName%*.sub.*}"
+    scriptSubcommand="${scriptName%%.sub.*}"
     list+=($scriptSubcommand)
     $DEBUG && echo "Found #${#list[@]} : $scriptPath"
 done
