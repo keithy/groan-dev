@@ -10,7 +10,7 @@ describe "Test groan base_script" && {
       should_fail
 
       echo "[$out]"
-      expect $out to_be "Not Found: basic_script sub-command 'not-ever'." 
+      expect $out to_be "Not Found: basic_script sub-command: 'not-ever'." 
     )
   }
 

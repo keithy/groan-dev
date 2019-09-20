@@ -1,26 +1,20 @@
-# grow.help.cmd.sh
+# groan test.sh
 #
 # by Keith Hodges 2010
 #
+# A Dummy
+
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
-# General Help On Commands
-
-# may have been invoked with a partial name
-# so set the full command name
-command="breadcrumbs"
-description="show breadcrumbs"
- 
+command="test"
+description="dummy (test for duplication)"
 usage="usage:
-$breadcrumbs           #show breadcrumbs
-$breadcrumbs  --help   #this text"
+$breadcrumbs test"
 
 $SHOWHELP && executeHelp
 $METADATAONLY && return
 
-$DEBUG && echo "Command: '$command'"
-
-echo "$breadcrumbs"
+echo "Test successful: ($@)"
 
 exit 0
 

@@ -1,30 +1,24 @@
-# groan help commands.cmd.sh
+# grow.help.cmd.sh
 #
-# by Keith Hodges 2018
-
+# by Keith Hodges 2010
+#
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
-command="commands"
-description="list available commands"
-usage="usage:
-$breadcrumbs"
+# General Help On Commands
+
+# may have been invoked with a partial name
+# so set the full command name
+command="breadcrumbs"
+description="show breadcrumbs"
+usage="$breadcrumbs           #show breadcrumbs
+$breadcrumbs  --help   #this text"
 
 $SHOWHELP && executeHelp
 $METADATAONLY && return
 
-commandOrientation "${BASH_SOURCE}"
-$DEBUG && commandOrientationDebug
+$DEBUG && echo "Command: '$command'"
 
-echo "Help list - commands"
-echo
-
- 
-$DEBUG && echo " Sourcing: $thisScriptDir/list-commands.content.sh"
-source $thisScriptDir/list-commands.content.sh
-
- 
-
-echo
+echo "$breadcrumbs"
 
 exit 0
 

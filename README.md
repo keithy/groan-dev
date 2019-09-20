@@ -11,13 +11,18 @@ The `groan-dev` project provides comprehensive testing tooling and specs for `gr
 This facilitates debugging of features such as command **composition** which
 may be tricky to implement correctly.
 
+## git Sub-modules
+
+`groan` is included as a sub-module of `groan-dev` so tat the two may be developed in parallel.
+
 ## Use hardlinks
 
 When developing it is recommended to use hardlinks, so that all identical files have one and the same source.
 Since this is invisible to `git`, the hardlinks need to be setup manually using. 
  
 ```
-hardlink -c .
+hardlink -cv .
 ```
 
 (on OSX hardlink can be installed with brew)
+

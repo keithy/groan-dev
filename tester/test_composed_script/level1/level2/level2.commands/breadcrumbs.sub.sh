@@ -10,9 +10,7 @@ $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 # so set the full command name
 command="breadcrumbs"
 description="show breadcrumbs"
- 
-usage="usage:
-$breadcrumbs           #show breadcrumbs
+usage="$breadcrumbs           #show breadcrumbs
 $breadcrumbs  --help   #this text"
 
 $SHOWHELP && executeHelp

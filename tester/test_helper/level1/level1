@@ -34,29 +34,19 @@ function identifyPlatform
 
 function readLocations
 {
-  commandFile="$1"
-  commandDir=$(dirname "$commandFile")
-  commandName=${commandFile##*/} # `basename $commandFile` 
+    local dir="$1"
+    local name="$2"
 
-  locations=("$commandDir/$commandName.commands") #default
-  defaultSubcommand="_default" #default
-  defaultDispatch="_dispatch.sh"
+    commandDir="$1" #global used within <name>.locations.sh file
+    $DEBUG && echo "Reading Locations: ${dir}/${name}.locations.sh"
+    source "${dir}/${name}.locations.sh"
 
-  #commandDir commandName globals used within <name>.locations.sh file
-
-  locationsConfig="${commandDir}/${commandName}.locations.sh"
-  $DEBUG && echo "Reading Locations: $locationsConfig"
-  if [ -f "$locationsConfig" ]; then  
-    source "$locationsConfig"
-  else 
-    $DEBUG && echo "^^ not found"
-  fi
-  return 0
+    return 0
 }
 
 function readConfig
 {
-    for configFile in ${configFileLocations[@]:-}
+    for configFile in ${configFileLocations[@]}
     do
         $DEBUG && echo "Looked for config in: $configFile"
         if [[ -f "$configFile" ]]; then
@@ -69,8 +59,7 @@ function readConfig
 
 function readThemes
 {
-  bold=$''; dim=$''; bold=$''; reset=$''
-  for themeFile in ${themePath[@]:-}
+    for themeFile in ${themePath[@]}
     do
         if [[ -f "$themeFile" ]]
         then
@@ -80,8 +69,7 @@ function readThemes
             $DEBUG && echo "Theme script not found: $themeFile"
         fi
     done
-
-  return 0
+    return 0
 }
 
 # Args: "${args[@]:+${args[@]}}" # pattern needed when set -u is on bash<=4.1
@@ -92,21 +80,18 @@ function executeScript {
     scriptDir="$2"
     scriptName="$3"
     scriptSubcommand="$4"
-
-    if [ "$scriptSubcommand" != "$defaultSubcommand" ]; then
-       breadcrumbs="${breadcrumbs} $scriptSubcommand"
-    fi
+    breadcrumbs="${breadcrumbs} $scriptSubcommand"
 
     case ${scriptPath##*.} in
         sh)
             $DEBUG && echo "Running source: $scriptPath ${args[@]:+${args[@]}}"
             sourceScript "${args[@]:+${args[@]}}"
-            return
+            exit 0
         ;;
         exec)
             $DEBUG && echo "Running exec: $scriptPath ${args[@]:+${args[@]}}"
             exec "$scriptPath" "${args[@]:+${args[@]}}"
-            return
+            exit 0
         ;;
         *)
             $DEBUG && echo "Running metadata file: ${scriptPath/.sub.*/.meta.sh}"
@@ -117,7 +102,7 @@ function executeScript {
 
             $DEBUG && echo "Running eval: $scriptPath ${args[@]:+${args[@]}}"				
             eval "$scriptPath" ${args[@]:+${args[@]}}
-            return
+            exit 0
         ;;
     esac
 }
@@ -128,9 +113,7 @@ function sourceScript
 }
 
 function executeHelp {
-  printf "${bold}$description${reset}\n"
-  printf "\n${bold}options:${reset}\n$commonOptions\n"
-  printf "\n${bold}usage:${reset}\n$usage\n"
+   printf "${bold}${breadcrumbs}${reset} - $description\n\n$usage\n"
 }
 
 function checkMarkdownViewer {
@@ -157,6 +140,20 @@ function shiftArgsIntoNext {
     args=("${params[@]:+${params[@]}}")
 }
 
+
+D_INDENT=""
+function subcommandOrientationDebug {
+
+    echo "$D_INDENT workingDir: $workingDir" 		
+    echo "$D_INDENT thisScriptName: ${bold}$thisScriptName${reset}"
+    echo "$D_INDENT thisScriptDir: $thisScriptDir"
+    echo "$D_INDENT parentDir: ${parentDir:-}"
+    echo "$D_INDENT parentCommand: '${parentCommand:-}' Args(${#args[@]}): ${args[@]:+${args[@]}}"
+    echo "$D_INDENT thisSubcommand: '$thisSubcommand' Args(${#args[@]}): ${args[@]:+${args[@]}}"
+    echo "$D_INDENT breadcrumbs: ${breadcrumbs}"
+    D_INDENT+="  "
+}
+
 # START
 
 workingDir=$(pwd)
@@ -166,6 +163,7 @@ commandFile="$(cd "${0%/*}" 2>/dev/null; echo "$PWD"/"${0##*/}")"
 if [ -L "$commandFile" ]; then
   commandFile=`readlink -n $commandFile`
 fi
+commandName=${commandFile##*/} # `basename $commandFile` 
 
 # our contribution to help
 
@@ -226,8 +224,8 @@ do
       --theme=*)
             THEME=${arg##--theme=}
       ;;
-      --*)
-        args+=($arg)
+      -*)
+          args+=($arg)
       ;;
       *)
           if [[ "$subcommand" = "" ]]; then
@@ -237,13 +235,13 @@ do
           fi
       ;;
     esac
+    shift
 done
  
-readLocations "$commandFile"
-
 breadcrumbs="$commandName"
-rootCommandFile="$commandFile"
+commandDir=$(dirname "$commandFile")
 
+readLocations "$commandDir" "$commandName"
 readConfig
 readThemes
 
@@ -256,18 +254,12 @@ if $DEBUG; then
     echo "Sub-command: '$subcommand'"
 fi
 
-commandFileList=()
-breadcrumbsList=()
 for scriptDir in ${locations[@]} 
 do
-    dispatcher="$scriptDir/${defaultDispatch}"
-    if [ -f "$dispatcher" ]; then
-      source "$dispatcher"
-      exit 0
-    fi
+    source "$scriptDir/$defaultDispatch"
 done
 
-$LOUD && echo "Dispatcher Not Found: ${defaultDispatch:-_dispatch.sh}.
+$LOUD && echo "Not Found: $commandName sub-command '$subcommand'."
 exit 1
 
 # "This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 

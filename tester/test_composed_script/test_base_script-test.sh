@@ -22,7 +22,7 @@ describe "Test groan base_script" && {
  
       expect_array out to_contain "Looked for config in: /*/base_script.conf.sh"
       expect_array out to_contain "Looked for config in: /*/.base_script.conf.sh"
-      expect_array out to_contain "Looked for config in: /*/test_composed_script/base_script.conf.sh"
+      expect_array out to_contain "Looked for config in: /*/test_*/base_script.conf.sh"
       expect_array out to_contain '*SCRIPT*base_script*'
       expect_array out to_contain "Sub-command: 'test'"
       expect_array out to_contain "Looking for test\*.sub.\* in:*"     

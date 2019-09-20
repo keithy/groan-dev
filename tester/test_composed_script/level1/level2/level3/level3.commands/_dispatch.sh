@@ -1,17 +1,16 @@
 # This dispatcher is looking for the chosen sub-command (in this directory)
-# It was invoked from the context of a top level command whose <cmd>-locations.conf
+# It was invoked from the context of a top level command whose <cmd>.locations.sh
 # specified this as the dispatcher.
 #
-# Alternative dispatchers may be defined for invocation from sub-command contexts
-# e.g. groan help topics
-# The help sub-command invokes the dispatcher: _help_dispatch.sh
-
 # This approach supports partial matching of subcommands
 
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
+#note $subcommand requested may be partial and $scriptSubcommand is the matched result 
 target="${subcommand}*.sub.*"
 exact="${subcommand}.sub.*"
+
+commandFileList+=("$commandFile")
 
 $DEBUG && echo "Looking for $target in: $scriptDir"
 
@@ -25,7 +24,8 @@ list=()
 for scriptPath in $scriptDir/$target
 do
     scriptName="${scriptPath##*/}"
-    scriptSubcommand="${scriptName%%.sub.*}"
+    scriptSubcommand="${scriptName%%.cmd.*}"
+    scriptSubcommand="${scriptSubcommand%%.sub.*}"
     list+=($scriptSubcommand)
     $DEBUG && echo "Found #${#list[@]} : $scriptPath"
 done
@@ -38,5 +38,10 @@ fi
 for scriptPath in $scriptDir/$target
 do
     executeScript "$scriptPath" "$scriptDir" "$scriptName" "$scriptSubcommand"
-    exit 1
+    breadcrumbsList+=("$breadcrumbs")
+
+    return
 done
+
+$LOUD && echo "Not Found: $breadcrumbs sub-command: '$subcommand'."
+exit 1
