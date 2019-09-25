@@ -20,9 +20,9 @@ describe "Test groan basic_script" && {
         
       printf '[%s]\n' "${out[@]}"
  
-      expect_array out to_contain "Looked for config in: /*/basic_script.conf.sh"
-      expect_array out to_contain "Looked for config in: /*/.basic_script.conf.sh"
-      expect_array out to_contain "Looked for config in: /*/test_basic_script/basic_script.conf.sh"
+      expect_array out to_contain "Config? /*/basic_script.conf.sh"
+      expect_array out to_contain "Config? /*/.basic_script.conf.sh"
+      expect_array out to_contain "Config? /*/test_basic_script/basic_script.conf.sh"
       expect_array out to_contain '*SCRIPT*basic_script*'
       expect_array out to_contain "Sub-command: 'test-exec'"
       expect_array out to_contain "Looking for test-exec\*.sub.\* in:*"     

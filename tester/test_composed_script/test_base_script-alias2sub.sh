@@ -5,7 +5,7 @@ source ../bash-spec-2/bash-spec.sh
 describe "Test groan base_script alias" && {
 
   context "base_script alias" && {
-    it "Displays: base_script level1 breadcrumbs" && (
+    it "Displays: base_script alias" && (
       out=$(./base_script alias)
       should_succeed
 

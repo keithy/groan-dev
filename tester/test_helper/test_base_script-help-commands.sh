@@ -27,13 +27,13 @@ describe "Testing help comands list" && {
 
        #default commands occur twice
        expect_array out to_contain "base_script help * show topical help"
-       occurring 2 times
+       occurring 2 time
 
        expect_array out to_contain "base_script level             * report level"
-       occurring 2 times 
+       occurring 1 times 
 
        expect_array out to_contain "base_script level level       * report level"
-       occurring 2 times 
+       occurring 1 time 
 
        expect_array out to_contain "base_script level level level * report level"
        occurring 2 times 

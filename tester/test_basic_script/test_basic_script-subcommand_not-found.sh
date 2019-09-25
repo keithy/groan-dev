@@ -10,7 +10,7 @@ describe "Test groan base_script" && {
       should_fail
 
       echo "[$out]"
-      expect $out to_be "Not Found: basic_script sub-command: 'not-ever'." 
+      expect $out to_match "Not Found: basic_script .*not-ever.*" 
     )
   }
 
@@ -20,9 +20,9 @@ describe "Test groan base_script" && {
         
        printf '[%s]\n' "${out[@]}"
  
-       expect_array out to_contain "Looked for config in: /*/basic_script.conf.sh"
-       expect_array out to_contain "Looked for config in: /*/.basic_script.conf.sh"
-       expect_array out to_contain "Looked for config in: /*/test_basic_script/basic_script.conf.sh"
+       expect_array out to_contain "Config? /*/basic_script.conf.sh"
+       expect_array out to_contain "Config? /*/.basic_script.conf.sh"
+       expect_array out to_contain "Config? /*/test_basic_script/basic_script.conf.sh"
        expect_array out to_contain '*SCRIPT*basic_script*'
        expect_array out to_contain "Sub-command: 'not-ever'"
        expect_array out to_contain "Looking for not-ever\*.sub.\* in:*"     

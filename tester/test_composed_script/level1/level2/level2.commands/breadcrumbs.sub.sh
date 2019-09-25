@@ -18,6 +18,8 @@ $METADATAONLY && return
 
 $DEBUG && echo "Command: '$command'"
 
+breadcrumbs="$breadcrumbs $scriptSubcommand"
+
 echo "$breadcrumbs"
 
 exit 0
