@@ -1,6 +1,6 @@
-# groan help commands.cmd.sh
+# groan help commands.sub.sh
 #
-# by Keith Hodges 2018
+# by Keith Hodges 2019
 
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
@@ -12,49 +12,7 @@ usage="$breadcrumbs    # list commands"
 
 $SHOWHELP && executeHelp
 $METADATAONLY && return
- 
-# The function of find_commands is to populate the two arrays
-# commandFileList= each element is a sub-command file (e.g. helper)
-# breadcrumbsList= each element is a list of subcommands that reaches the above command
 
-# Recursively scan the subcommands for those that call the dispatcher of a contained command
-function find_commands()
-{
-# $DDEBUG && set -x
-
-  local commandFile="$1"
-  local crumbs="$2"
-
-  commandFileList+=("$commandFile")
-  crumbsList+=("$crumbs")
-
-  local scriptDir
-  local scriptPath
-
-  readLocations "$commandFile"
-
-  for scriptDir in "${locations[@]}"
-  do
-    for scriptPath in "$scriptDir"/*.sub.*.cmd.*
-    do
-      parseScriptPath "$scriptPath"
-
-      if [ -n "scriptSubcommand" ]; then
-        if ! [[ "$destSubcommandName" == *.sub.* ]]; then #this subcommand invokes a dispatcher
-          crumbs="$2 $scriptSubcommand"
-          find_commands "$destPath" "$crumbs"
-        fi
-      fi
-    done
-  done
-
-
- if $DDEBUG; then
-  :
-  set +x
- fi
-}
- 
 function list_subcommands()
 {
   commandFile="$1"
@@ -86,7 +44,6 @@ function list_subcommands()
 
 commandFileList=()
 crumbsList=()
- 
 find_commands "$rootCommandFile" ${rootCommandFile##*/}
 
 if $DEBUG; then # print out results of recursive search
