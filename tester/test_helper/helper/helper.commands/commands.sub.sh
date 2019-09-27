@@ -22,6 +22,20 @@ function list_subcommands()
 
   for scriptDir in ${locations[@]} ; do
 
+    # The default case without any subcommands (if not hidden)
+    if ! [[ "$defaultSubcommand" == _* ]] ; then    
+     for scriptPath in $scriptDir/$defaultSubcommand.sub.*
+      do
+        parseScriptPath "$scriptPath"
+        $DEBUG && echo "Parsed: …${scriptDir##*/}${dim}/${reset}$scriptName (${scriptSubcommand:-no subcommand})" 
+        METADATAONLY=true
+        executeScriptPath "$scriptPath"  
+
+        printf "%-45s" "$crumbs"
+        echo "$description"
+      done
+    fi
+
     for scriptPath in $scriptDir/*.sub.*
     do
       parseScriptPath "$scriptPath"
@@ -36,7 +50,6 @@ function list_subcommands()
 
         printf "%-45s" "$crumbs"
         echo "$description"
-
       fi
     done
   done

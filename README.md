@@ -26,3 +26,24 @@ hardlink -cv .
 
 (on OSX hardlink can be installed with brew)
 
+## scratch pad
+
+```
+args=("$subcommand" ${args[@]:+${args[@]}})
+for scriptPath in $scriptDir/_not_found_sub.*
+do
+  scriptName="${scriptPath##*/}"
+  scriptSubcommand=""
+  scriptRoute="${scriptName##_not_found_sub.}"  #remove 
+  destCommand="${scriptRoute%.cmd.*}" #remove after cmd 
+  destPath="${scriptDir%/*}/${destCommand}/${destCommand}"
+  destSubcommandName="${scriptRoute#*.cmd.}"  # keep everything after .cmd.
+
+  readLocations "$destPath"
+  for scriptDir in "${locations[@]}"
+  do
+      executeScriptPath "$scriptDir/$destSubcommandName"
+  done
+  return
+done
+```
