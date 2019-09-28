@@ -16,8 +16,7 @@ locations=(
 
 defaultDispatch="_dispatch.sh"
 defaultSubcommand="test"
-defaultNotFound="$commandName help topic"
-
+ 
 themePath=( "$commandDir/../../groan/groan/groan.themes.sh" "$commandDir/$commandName.themes.sh" "$commandDir/$commandName.theme-$THEME.sh" )
 
 markdownViewerUtility="mdv -t 715.1331"
