@@ -1,4 +1,4 @@
-# groan deploy.sub.sh
+# sensible deploy.sub.sh
 #
 # by Keithy 2019
 #
