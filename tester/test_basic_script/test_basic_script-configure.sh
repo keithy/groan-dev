@@ -85,22 +85,11 @@ describe "Test groan base_script configure- no configuration set" && {
        expect_array out to_contain "TEST=yes"
     }
   }
-
-  context "base_script configure test --install" && {
-   
-    it "requests destination location" && {
-      out=$(./basic_script configure test --install)
-      should_fail
-
-      echo "[$out]"
-      expect $out to_be "Provide an install location option for test.conf: (--local --user --global)" 
-    }
-  }
  
-  context "base_script configure test --install --local" && {
+  context "base_script configure test --install=local" && {
    
     it "requests confirmation" && {
-      capture out <( ./basic_script configure test --install --local)
+      capture out <( ./basic_script configure test --install=local)
       should_succeed
 
       printf '[%s]\n' "${out[@]}"
@@ -110,16 +99,16 @@ describe "Test groan base_script configure- no configuration set" && {
     }
   }
 
-  context "base_script configure test --install --local --confirm" && {
+  context "base_script configure test --install=local --confirm" && {
    
     it "requests confirmation" && {
-      capture out <( ./basic_script configure test --install --local --confirm)
+      capture out <( ./basic_script configure test --install=local --confirm)
       should_succeed
 
       printf '[%s]\n' "${out[@]}"
 
       expect_array out to_contain "cp test.conf */tester/test_basic_script/basic_script.conf.sh"
-      expect_array out to_contain "test.conf installed as --local configuration"
+      expect_array out to_contain "test.conf installed as local configuration"
     }
   }
 
@@ -130,7 +119,7 @@ describe "Test groan base_script configure- no configuration set" && {
 
       printf '[%s]\n' "${out[@]}"
 
-      expect_array out to_contain "--local config found: */tester/test_basic_script/basic_script.conf.sh"
+      expect_array out to_contain "*Option:*local*found:*/tester/test_basic_script/basic_script.conf.sh*"
       expect_array out to_contain "TEST=yes"
     }
   }

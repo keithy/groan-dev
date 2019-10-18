@@ -13,7 +13,7 @@ may be tricky to implement correctly.
 
 ## git Sub-modules
 
-`groan` is included as a sub-module of `groan-dev` so tat the two may be developed in parallel.
+`groan` is included as a sub-module of `groan-dev` so that the two may be developed in parallel.
 
 ## Use hardlinks
 
