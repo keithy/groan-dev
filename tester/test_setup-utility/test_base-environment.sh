@@ -2,12 +2,12 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base_script environment" && {
+describe "Testing: base setup environment" && {
 
-  context "base_script environment" && {
+  context "base setup environment" && {
    
     it "Displays environment" && {
-       capture out <( ./basic_script environment 2>&1 )
+       capture out <( ./base setup environment 2>&1 )
         
        printf '[%s]\n' "${out[@]}"
  

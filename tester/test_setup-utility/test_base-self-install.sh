@@ -2,13 +2,13 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-rm -f /usr/local/bin/basic_script
+rm -f /usr/local/bin/base
 
-describe "Test groan base_script self-install" && {
+describe "Testin: base setup self-install" && {
 
   context "self-install and no action" && {
     it "Displays error message" && {
-      out=$(./basic_script self-install)
+      out=$(./base setup self-install)
       should_fail
 
       echo "[$out]"
@@ -20,7 +20,7 @@ describe "Test groan base_script self-install" && {
 
   context "self-install and destination not on path" && {
     it "Displays error message" && {
-      out=$(./basic_script self-install . --link)
+      out=$(./base setup self-install . --link)
       should_fail
 
       echo "[$out]"
@@ -33,13 +33,13 @@ describe "Test groan base_script self-install" && {
    
     it "Performs self-install --unlink --confirm" && {
    
-      capture out <(./basic_script self-install --unlink --confirm 2>&1)
-      out=$(./basic_script self-install --unlink)
+      capture out <(./base setup self-install --unlink --confirm 2>&1)
+      out=$(./base setup self-install --unlink)
       should_fail
 
       echo "[$out]"
       
-      expect $out to_match "Not a link: .*/basic_script - leaving well alone" 
+      expect $out to_match "Not a link: .*/base setup - leaving well alone" 
     }
   }
 
@@ -47,12 +47,12 @@ describe "Test groan base_script self-install" && {
    
     it "Performs self-install  /usr/local/bin --link" && {
    
-      capture out <(./basic_script self-install /usr/local/bin --link 2>&1)
+      capture out <(./base setup self-install /usr/local/bin --link 2>&1)
       should_succeed
 
       printf '[%s]\n' "${out[@]}"
  
-      expect_array out to_contain "ln -s */tester/test_basic_script/basic_script /usr/local/bin/basic_script"
+      expect_array out to_contain "ln -s */tester/test_base/base setup /usr/local/bin/base"
       expect_array out to_contain "dryrun: --confirm required to proceed"
     }
   }
@@ -61,16 +61,16 @@ describe "Test groan base_script self-install" && {
    
     it "Performs self-install  /usr/local/bin --link" && {
    
-      capture out <(./basic_script self-install /usr/local/bin --link --confirm 2>&1)
+      capture out <(./base setup self-install /usr/local/bin --link --confirm 2>&1)
       should_succeed
 
       printf '[%s]\n' "${out[@]}"
  
-      expect_array out to_contain "ln -s */tester/test_basic_script/basic_script /usr/local/bin/basic_script"
-      expect_array out not to_contain "*basic_script: File exists"
+      expect_array out to_contain "ln -s */tester/test_base/base setup /usr/local/bin/base"
+      expect_array out not to_contain "*base: File exists"
       expect_array out not to_contain "dryrun*"
     }
   }
 }
 
-rm -f /usr/local/bin/basic_script
+rm -f /usr/local/bin/base

@@ -70,7 +70,8 @@ fi
 
 for i in "${!commandFileList[@]}"
 do
-  echo "${bold}${commandFileList[i]##*/} commands:${reset}"
+  displayName="${commandFileList[i]##*/}"
+  echo "${bold}${displayName/-/ } commands:${reset}"
 
   list_subcommands "${commandFileList[i]}" "${crumbsList[i]}"
   
