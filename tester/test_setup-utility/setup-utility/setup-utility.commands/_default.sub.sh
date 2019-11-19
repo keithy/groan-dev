@@ -1,82 +1,88 @@
-# groan single command list of subcommands.sub.sh
+# groan single command list of c_sub_cmds.sub.sh
 #
 # by Keith Hodges 2019
 
 $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 
 command="commands"
-description="list available commands"
+description="list $c_name commands"
 #since help doesn't exec anything many common options don't apply
 commonOptions="--theme=light    # alternate theme"
 usage="$breadcrumbs    # list commands"
 
-$SHOWHELP && executeHelp
+$SHOWHELP && g_displayHelp
 $METADATAONLY && return
 
-commandFileList=()
+c_file_list=()
 crumbsList=()
-find_commands "$commandFile" "$breadcrumbs"
 
-function list_subcommands()
+# start search at this level, not the top level
+g_findCommands "$c_file" "$breadcrumbs" false
+echo "${bold}HERE DDDDD${reset} [${crumbsList[*]}]"
+
+function list_sub_cmds()
 {
-  commandFile="$1"
-  crumbs="$2"
- 
-  readLocations "$commandFile"
+  local c_file="$1"
+  local crumbs="$2"
 
-  for scriptDir in ${locations[@]} ; do
+  g_readLocations "$c_file"
 
-    # The default case without any subcommands (if not hidden)
-    if ! [[ "$defaultSubcommand" == _* ]] ; then    
-     for scriptPath in $scriptDir/$defaultSubcommand.sub.*
+  for s_dir in ${g_locations[@]} ; do
+
+	# Display the default sub-command at the top of  the list (without its breadcrumb)
+    #if ! [[ "$g_default_subcommand" == _* ]] ; then    
+     for s_path in $s_dir/${g_default_subcommand}.sub.*
       do
-        parseScriptPath "$scriptPath"
-        $DEBUG && echo "Parsed: …${scriptDir##*/}${dim}/${reset}$scriptName (${scriptSubcommand:-no subcommand})" 
+        g_parseScriptPath "$s_path"
+        $DEBUG && echo "Parsed: …${s_dir##*/}${dim}/${reset}$s_name (${s_sub_cmd:-no subcommand})" 
         METADATAONLY=true
-        executeScriptPath "$scriptPath"  
+        g_executeScriptPath "$s_path"  
 
         printf "%-45s" "$crumbs"
         echo "$description"
       done
-    fi
+    #fi
 
-    for scriptPath in $scriptDir/*.sub.*
-    do
-      parseScriptPath "$scriptPath"
+	#Display the c_sub_cmds (with breadcrumb)
+	for s_path in $s_dir/[^_]*.sub.*
+	do
+	  g_parseScriptPath "$s_path"
 
-      $DEBUG && echo "Parsed: …${scriptDir##*/}${dim}/${reset}$scriptName (${scriptSubcommand:-no subcommand})" 
+	  $DEBUG && echo "Parsed: …${s_dir##*/}${dim}/${reset}$s_name (${s_sub_cmd:-no subcommand})" 
 
-      if [ -n "$scriptSubcommand" ]; then
-        [[ "$scriptSubcommand" == _* ]] || crumbs="$2 $scriptSubcommand"
+	  if [[ -n "$s_sub_cmd" ]] && [[ "$s_dest_subcmd_name" == *.sub.* ]]; then
+	 
+		crumbs="$2 $s_sub_cmd"
 
-        METADATAONLY=true
-        executeScriptPath "$scriptPath"  
+		METADATAONLY=true
+		printf "%-45s" "$crumbs"
+		g_executeScriptPath "$s_path"  
 
-        printf "%-45s" "$crumbs"
-        echo "$description"
-      fi
-    done
+		echo "$description"
+	  fi
+	done
   done
 }
 
 if $DEBUG; then # print out results of recursive search
   echo
-  for i in "${!commandFileList[@]}"; do    
+  for i in "${!c_file_list[@]}"; do    
        printf "(%d) %-45s" $i ${crumbsList[i]}
-       echo "${commandFileList[i]}"
+       echo "${c_file_list[i]}"
   done
   echo
 fi
 
-for i in "${!commandFileList[@]}"
-do
-  displayName="${commandFileList[i]##*/}"
+# only display our direct c_sub_cmds (no need to loop)
+i=0
+#for i in "${!c_file_list[@]}"; do
+  displayName="${c_file_list[i]##*/}"
   echo "${bold}${displayName/-/ } commands:${reset}"
-
-  list_subcommands "${commandFileList[i]}" "${crumbsList[i]}"
+  
+  list_sub_cmds "${c_file_list[i]}" "${crumbsList[i]}"
   
   echo
-done
+#done
 
 exit 0
 

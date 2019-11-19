@@ -1,22 +1,22 @@
-#locations to search for configuration *.conf files
+#g_locations to search for configuration *.conf files
 
-configOptions=("--local" "--user" "--global")
+g_config_options=("--local" "--user" "--global")
 
-configFileLocations=(
-	"$workingDir/$commandName.conf.sh"  # --local
-	"$HOME/.$commandName.conf.sh"       # --user
-	"$commandDir/$commandName.conf.sh"  # --global
+g_config_file_locations=(
+	"$g_working_dir/$c_name.conf.sh"  # --local
+	"$HOME/.$c_name.conf.sh"       # --user
+	"$c_dir/$c_name.conf.sh"  # --global
 )
 
-#locations to search for commands
-locations=(
-	"$scriptDir/sub-commands"
+#g_locations to search for commands
+g_locations=(
+	"$s_dir/sub-commands"
 )
 
-defaultDispatch="_dispatch.sh"
+g_default_dispatch="_dispatch.sh"
 defaultSubSubcommand="default"
 
-markdownViewerUtility="mdv -t 715.1331"
+g_markdown_viewer="mdv -t 715.1331"
 
 #"This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 
 #Any additional contribution submitted for incorporation into or for distribution with this file shall be presumed subject to the same license."

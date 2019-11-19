@@ -12,13 +12,13 @@ describe "Testing: base setup - lists setup commands" && {
 
        expect_array out to_contain "*setup utility commands:*"
  
-       expect_array out to_contain "base setup * list available commands"
+       expect_array out to_contain "base setup * list setup-utility commands"
 
        expect_array out to_contain "base setup configure * select or edit configuration file"
 
        expect_array out to_contain "base setup environment * show script/environment variables"
 
-       expect_array out to_contain "base setup new * create a new project using template"
+       expect_array out to_contain "base setup new * create a new project/file structure from a template"
  
        expect_array out to_contain "base setup self-install * install in system"
 

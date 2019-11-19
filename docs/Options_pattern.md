@@ -40,8 +40,8 @@ do
           args+=($arg)
       ;;
       *)
-          if [[ "$subcommand" = "" ]]; then
-             subcommand=$arg
+          if [[ "$c_sub_cmd" = "" ]]; then
+             c_sub_cmd=$arg
           else
              args+=($arg)
           fi

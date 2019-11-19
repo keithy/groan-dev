@@ -10,7 +10,7 @@ description="Update to latest code (from git)"
 usage="usage:
 $breadcrumbs $command"
 
-$SHOWHELP && executeHelp
+$SHOWHELP && g_displayHelp
 $METADATAONLY && return
 
 $DEBUG && echo "Command: '$command'"

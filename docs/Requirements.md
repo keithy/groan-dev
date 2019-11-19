@@ -26,7 +26,7 @@ One command, may reference another [folder-contained] command's sub-commands at 
 1. most "commands" are running exactly the same code
 2. therefore they share the same top-level options and identical features
 3. their implementation file content may be hard-linked.
-4. the implementation of `_dispatch.sh` is also identical throughout. Commands with alternative implementations should configure and use a different name for their `defaultDispatch`.
+4. the implementation of `_dispatch.sh` is also identical throughout. Commands with alternative implementations should configure and use a different name for their `g_default_dispatch`.
 
 ### A folder-contained command may be invoked as a variety of sub-commands
 
@@ -34,7 +34,7 @@ One command, may reference another [folder-contained] command's sub-commands at 
 2. Synonyms are supported, (e.g. `groan grep` or `groan find`)
 3. Variations are supported (e.g. the help command is called as 'command' or 'topics')
 
-A specific sub-command (e.g. `groan topic`) may be defined using the script named `topic.sub.help.cmd.sh` This defines the `topic` sub-command as implemented by the command contained in the command folder `help`. All sub-command suites defined by `help`'s config are scanned, but a specialised dispatcher called `_topic_dispatch.sh` will override the default `_dispatch.sh`. This implements a "called as" semantic. i.e. the help command was invoked as `topic`. 
+A specific sub-command (e.g. `groan topic`) may be defined using the script named `topic.sub.help.cmd.sh` This defines the `topic` sub-command as implemented by the command contained in the command folder `help`. All sub-command suites defined by `help`'s config are scanned, but a specialised g_dispatcher called `_topic_dispatch.sh` will override the default `_dispatch.sh`. This implements a "called as" semantic. i.e. the help command was invoked as `topic`. 
 
 	- help.cmd.help.sub.sh -> ../help/sub-commands/_help_dispatch.sh
 	- commands.cmd.help.sub.sh -> ../help/sub-commands/_commands_dispatch.sh

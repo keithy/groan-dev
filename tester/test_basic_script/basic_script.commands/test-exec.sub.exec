@@ -12,7 +12,7 @@ usage="usage:
 $breadcrumbs         - display text and (args)
 $breadcrumbs --help  - this text"
 
-$SHOWHELP && executeHelp
+$SHOWHELP && g_displayHelp
 $METADATAONLY && exit 0
 
 echo "Test successful: ($@)"

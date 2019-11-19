@@ -12,7 +12,7 @@ $DEBUG && echo "${dim}${BASH_SOURCE}${reset}"
 command="test-ruby"
 description="testing ruby invocation"
 usage="usage:
-$commandName test-ruby"
+$c_name test-ruby"
 
 #"This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 
 #Any additional contribution submitted for incorporation into or for distribution with this file shall be presumed subject to the same license."

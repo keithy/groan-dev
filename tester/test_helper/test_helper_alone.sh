@@ -2,7 +2,7 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-# Helper has no locations file, uses default values
+# Helper has no g_locations file, uses default values
 
 describe "Test helper default command" && {
 
@@ -23,7 +23,7 @@ describe "Test helper default command" && {
     )
   }
  
-  context "base subcommand help" && {
+  context "base c_sub_cmd help" && {
     it "runs helper default'" && (
        capture out <( ./base help 2>&1 )
         
@@ -40,7 +40,7 @@ describe "Test helper default command" && {
     )
   }
  
-  context "base subcommand help -h" && {
+  context "base c_sub_cmd help -h" && {
     it "runs helper default'" && (
        capture out <( ./base help -h 2>&1 )
         

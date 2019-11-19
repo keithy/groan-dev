@@ -2,7 +2,7 @@
 
 source ../bash-spec-2/bash-spec.sh
 
-describe "Test groan base_script local aliasing of subcommands" && {
+describe "Test groan base_script local aliasing of c_sub_cmds" && {
 
   context "basic_script 'check' - aliased to 'test'" && {
     it "Displays 'Test successful message'" && (

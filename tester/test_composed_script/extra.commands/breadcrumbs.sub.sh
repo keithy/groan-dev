@@ -13,7 +13,7 @@ description="show breadcrumbs"
 usage="$breadcrumbs           #show breadcrumbs
 $breadcrumbs  --help   #this text"
 
-$SHOWHELP && executeHelp
+$SHOWHELP && g_displayHelp
 $METADATAONLY && return
 
 $DEBUG && echo "Command: '$command'"

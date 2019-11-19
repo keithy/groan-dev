@@ -17,14 +17,14 @@ $breadcrumbs breadcrumbs
 $breadcrumbs level
 $breadcrumbs --help    # this text"
 
-$SHOWHELP && executeHelp
+$SHOWHELP && g_displayHelp
 $METADATAONLY && return
 
 $DEBUG && echo "DispatchList: '$dispatchList'"
 $DEBUG && echo "Command: '$command'"
   
-rootCommandDir=$(dirname "$rootCommandFile")
-level=${commandDir:${#rootCommandDir}} # obtain the relative path to the root command
+rootCommandDir=$(dirname "$g_root_cmd_file")
+level=${c_dir:${#rootCommandDir}} # obtain the relative path to the root command
 level=${level//[^\/]/}                 # count the number of / in the path
 level=${#level}                  
 
