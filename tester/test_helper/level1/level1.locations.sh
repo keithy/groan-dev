@@ -2,6 +2,10 @@
 
 #g_locations to search for commands
 
+g_locations=(
+	  "${c_file}.commands"                                
+)
+  
 g_default_subcommand="report-level"
 
 #"This Code is distributed subject to the MIT License, as in http://www.opensource.org/licenses/mit-license.php . 

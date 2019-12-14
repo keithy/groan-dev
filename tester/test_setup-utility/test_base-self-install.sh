@@ -19,7 +19,7 @@ describe "Testin: base setup self-install" && {
 
 
   context "self-install and destination not on path" && {
-    it "Displays error message" && (
+    it "Displays error message" && {
       out=$(./base setup self-install . --link)
       should_fail
 

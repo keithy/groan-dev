@@ -4,8 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source ../bash-spec-2/bash-spec.sh
 
 #setup/reset
-rm ./base.conf.sh
-rm ./base.conf.sh.save
+\rm ./base.conf
+\rm ./base.conf.save
 
 describe "Testing base setupconfigure- no configuration set" && {
 
@@ -58,9 +58,9 @@ describe "Testing base setupconfigure- no configuration set" && {
  
       printf '[%s]\n' "${out[@]}"
 
-      expect_array out to_contain "*1) --local	\[ $DIR/other/base.conf.sh \]"
-      expect_array out to_contain "*2) --user	\[ */.base.conf.sh \]"
-      expect_array out to_contain "*3) --global	\[ $DIR/base.conf.sh \]"
+      expect_array out to_contain "*1) local	\[ $DIR/other/base.conf \]"
+      expect_array out to_contain "*2) user	\[ */.base.conf \]"
+      expect_array out to_contain "*3) global	\[ $DIR/base.conf \]"
 
       expect_array out to_contain "*test.conf (preset)"
       expect_array out to_contain "*test2.conf"
@@ -95,7 +95,7 @@ describe "Testing base setupconfigure- no configuration set" && {
 
       printf '[%s]\n' "${out[@]}"
 
-      expect_array out to_contain "cp test.conf $DIR/base.conf.sh"
+      expect_array out to_contain "cp test.conf $DIR/base.conf"
       expect_array out to_contain "dryrun:  --confirm required to proceed"
     }
   }
@@ -108,7 +108,7 @@ describe "Testing base setupconfigure- no configuration set" && {
 
       printf '[%s]\n' "${out[@]}"
 
-      expect_array out to_contain "cp test.conf $DIR/base.conf.sh"
+      expect_array out to_contain "cp test.conf $DIR/base.conf"
       expect_array out to_contain "test.conf installed as local configuration"
     }
   }
@@ -120,12 +120,12 @@ describe "Testing base setupconfigure- no configuration set" && {
 
       printf '[%s]\n' "${out[@]}"
 
-      expect_array out to_contain "*Option:*--local*found:*$DIR/base.conf.sh*"
+      expect_array out to_contain "*Option:*local*found:*$DIR/base.conf*"
       expect_array out to_contain "TEST=yes"
     }
   }
 }
 
 #setup/reset
-rm ./base.conf.sh
-rm ./base.conf.sh.save
+\rm ./base.conf
+\rm ./base.conf.save

@@ -26,7 +26,7 @@ function get_version()
   version="${version:-$cached}"
   [[ "$version" == "cached" ]] || echo "$version" > "$dir/.version" || true
   
-  [ -n "$version" ] && echo "${bold}${dim}(${dir##*/})${reset} ${bold}${2:-}${reset}: ${version}"
+  [ -n "$version" ] && printf "%s:${bold}${dim}%16s${reset} ${bold}%s${reset}\n" "${version}" "(${dir##*/})" "${2:-}"
 }
 
 # get the version of this sub-command's command (i.e. groan)
@@ -36,9 +36,7 @@ get_version $(dirname "${BASH_SOURCE%/*}")
 for i in "${!c_file_list[@]}"
 do
   g_readLocations "${c_file_list[i]}"
-
   get_version "${c_file_list[i]%/*}" "${crumbsList[i]}"
-  
 done
  
 exit 0
