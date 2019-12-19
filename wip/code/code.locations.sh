@@ -3,9 +3,9 @@
 g_config_options=("--local" "--user" "--global")
 
 g_config_file_locations=(
-	"$g_working_dir/$c_name.conf.sh"  # --local
-	"$HOME/.$c_name.conf.sh"       # --user
-	"$c_dir/$c_name.conf.sh"  # --global
+	"$g_working_dir/$c_name.conf"  # --local
+	"$HOME/.$c_name.conf"       # --user
+	"$c_dir/$c_name.conf"  # --global
 )
 
 #g_locations to search for commands

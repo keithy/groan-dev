@@ -20,9 +20,9 @@ describe "Test groan base_script local aliasing of c_sub_cmds" && {
         
       printf '[%s]\n' "${out[@]}"
  
-      expect_array out to_contain "Config? /*/base_script.conf.sh"
-      expect_array out to_contain "Config? /*/.base_script.conf.sh"
-      expect_array out to_contain "Config? /*/test_composed_script/base_script.conf.sh"
+      expect_array out to_contain "Config? /*/base_script.conf"
+      expect_array out to_contain "Config? /*/.base_script.conf"
+      expect_array out to_contain "Config? /*/test_composed_script/base_script.conf"
       expect_array out to_contain '*SCRIPT*base_script*'
       expect_array out to_contain "Sub-command: 'check'"
       expect_array out to_contain "Looking for check\*.sub.\* in:*"     
