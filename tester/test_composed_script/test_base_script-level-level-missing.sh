@@ -9,8 +9,6 @@ describe "Test handling of missing commands" && {
       out=$(./base_script missing 2>&1)
       should_fail
 
-      echo "[$out]"
-       
       expect $out to_contain "Not Found: base_script *missing*" 
     )
   }
@@ -20,8 +18,6 @@ describe "Test handling of missing commands" && {
       out=$(./base_script level missing 2>&1)
       should_fail
 
-      echo "[$out]"
-       
       expect $out to_contain "Not Found: base_script level *missing*" 
     )
   }
@@ -30,9 +26,7 @@ describe "Test handling of missing commands" && {
     it "Fails and displays 'Not Found:'" && (
       out=$(./base_script level level missing 2>&1)
       should_fail
-
-      echo "[$out]"
-       
+     
       expect $out to_contain "Not Found: base_script level level *missing*" 
     )
   }
@@ -41,9 +35,7 @@ describe "Test handling of missing commands" && {
     it "Fails and displays 'Not Found:'" && (
       out=$(./base_script level level level missing 2>&1)
       should_fail
-
-      echo "[$out]"
-       
+      
       expect $out to_contain "Not Found: base_script level level level *missing*" 
     )
   }

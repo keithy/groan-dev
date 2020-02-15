@@ -8,7 +8,7 @@ describe "Test groan base_script" && {
     it "Displays debug output" && {
       capture out <(./base_script version --theme=0)
         
-      printf '[%s]\n' "${out[@]}"
+      $LOUD && printf '[%s]\n' "${out[@]}"
  
       expect_array out to_contain "*:(test_composed_script) "
       expect_array out to_contain "*:(test_composed_script) base_script"

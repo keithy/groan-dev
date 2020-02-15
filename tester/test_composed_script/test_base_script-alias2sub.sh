@@ -9,7 +9,6 @@ describe "Test groan base_script alias" && {
       out=$(./base_script alias)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script alias" 
     )
   }

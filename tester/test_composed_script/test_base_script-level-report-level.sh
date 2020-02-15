@@ -9,7 +9,6 @@ describe "Test groan base_script level" && {
       out=$(./base_script level report-level)
       should_succeed
 
-      echo "[$out]"
       expect "$out" to_be "Level: 1" 
     }
   }
@@ -19,7 +18,6 @@ describe "Test groan base_script level" && {
       out=$(./base_script level)
       should_succeed
 
-      echo "[$out]"
       expect "$out" to_be "Level: 1" 
     }
   }
@@ -28,7 +26,6 @@ describe "Test groan base_script level" && {
       out=$(./base_script level level)
       should_succeed
 
-      echo "[$out]"
       expect "$out" to_be "Level: 2" 
     }
   }
@@ -38,7 +35,6 @@ describe "Test groan base_script level" && {
       out=$(./base_script level level level)
       should_succeed
 
-      echo "[$out]"
       expect "$out" to_be "Level: 3" 
     }
   }
@@ -48,7 +44,6 @@ describe "Test groan base_script level" && {
       out=$(./base_script level level level report-level)
       should_succeed
 
-      echo "[$out]"
       expect "$out" to_be "Level: 3" 
     }
   }

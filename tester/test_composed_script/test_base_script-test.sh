@@ -9,7 +9,6 @@ describe "Test groan base_script" && {
       out=$(./base_script test)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "Test successful: ()" 
     )
   }
@@ -18,7 +17,7 @@ describe "Test groan base_script" && {
     it "Displays debug output" && {
       capture out <( ./base_script -D test 2>&1 )
         
-      printf '[%s]\n' "${out[@]}"
+      $LOUD && printf '[%s]\n' "${out[@]}"
  
       expect_array out to_contain "Config? /*/base_script.conf"
       expect_array out to_contain "Config? /*/.base_script.conf"
@@ -34,7 +33,6 @@ describe "Test groan base_script" && {
       out=$(./base_script test this --or that --please)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "Test successful: (this --or that --please)" 
     )
   }

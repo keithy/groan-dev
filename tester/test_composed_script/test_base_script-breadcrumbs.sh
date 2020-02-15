@@ -9,7 +9,6 @@ describe "Test groan base_script breadcrumbs" && {
       out=$(./base_script breadcrumbs)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script breadcrumbs" 
     )
   }
@@ -18,7 +17,6 @@ describe "Test groan base_script breadcrumbs" && {
       out=$(./base_script level breadcrumbs)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script level breadcrumbs" 
     )
   }
@@ -28,7 +26,6 @@ describe "Test groan base_script breadcrumbs" && {
       out=$(./base_script level level breadcrumbs)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script level level breadcrumbs" 
     )
   }
@@ -38,7 +35,6 @@ describe "Test groan base_script breadcrumbs" && {
       out=$(./base_script level level level breadcrumbs)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script level level level breadcrumbs" 
     )
   }

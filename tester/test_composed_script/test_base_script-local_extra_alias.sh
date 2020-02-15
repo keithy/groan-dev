@@ -9,7 +9,6 @@ describe "Test groan base_script local aliasing to extra c_sub_cmds" && {
       out=$(./base_script crumbs)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script crumbs" 
     )
   }
@@ -18,7 +17,7 @@ describe "Test groan base_script local aliasing to extra c_sub_cmds" && {
     it "Displays debug output" && {
       capture out <( ./base_script -D crumbs 2>&1 )
         
-      printf '[%s]\n' "${out[@]}"
+      $LOUD && printf '[%s]\n' "${out[@]}"
  
       expect_array out to_contain "Config? /*/base_script.conf"
       expect_array out to_contain "Config? /*/.base_script.conf"
@@ -34,7 +33,6 @@ describe "Test groan base_script local aliasing to extra c_sub_cmds" && {
       out=$(./base_script crumbs this --or that --please)
       should_succeed
 
-      echo "[$out]"
       expect $out to_be "base_script crumbs" 
     )
   }
